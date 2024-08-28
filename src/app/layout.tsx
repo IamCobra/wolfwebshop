@@ -1,6 +1,6 @@
 "use client";
 
-import "./globals.css";
+import "./globals.css"; // Ensure this import is here
 import Navbar from "./components/navbar";
 import HeroSection from "./components/HeroSection";
 import TypedText from "./components/TypedText";
@@ -35,8 +35,7 @@ export default function RootLayout({
               </section>
             </div>
             <div className="w-full h-screen scroll-snap-start flex justify-center items-center bg-gray-600">
-              {children}{" "}
-              {/* This will be your dynamic content, perhaps more sections or the rest of the page content */}
+              {children}
             </div>
           </div>
         </ThemeProvider>
