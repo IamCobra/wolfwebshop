@@ -35,7 +35,7 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 bg-black/70 shadow-lg">
+    <nav className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 shadow-lg bg-black ">
       <div
         className="w-full mx-auto flex items-center justify-between p-4"
         style={{ filter: `blur(${blurAmount}px)` }}

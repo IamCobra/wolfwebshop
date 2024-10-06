@@ -1,8 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/css"; // Import Swiper styles
 
-// Define your clothing item type
+// Define your clothing items
 type ClothingItem = {
   id: number;
   name: string;
@@ -10,72 +13,61 @@ type ClothingItem = {
   image: string;
 };
 
+// Clothing items array
 const clothingItems: ClothingItem[] = [
   {
     id: 1,
-    name: 'Chechen Hoodie',
+    name: "Chechen Hoodie",
     price: 60,
-    image: '/images/hoodie.jpg',
+    image: "/assets/testasset.jpg", // Ensure your image is in public/assets/
   },
   {
     id: 2,
-    name: 'Chechen T-shirt',
+    name: "Chechen T-shirt",
     price: 40,
-    image: '/images/tshirt.jpg',
+    image: "/assets/chechen-tshirt.jpg", // Ensure your image is in public/assets/
   },
   {
     id: 3,
-    name: 'Chechen Sneakers',
+    name: "Chechen Sneakers",
     price: 80,
-    image: '/images/sneakers.jpg',
+    image: "/assets/chechen-sneakers.jpg", // Ensure your image is in public/assets/
   },
-  // Add more items as needed
 ];
 
 export default function ClothingCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const handleNext = () => {
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % clothingItems.length);
-  };
-
-  const handlePrev = () => {
-    setCurrentIndex(
-      (prevIndex) => (prevIndex - 1 + clothingItems.length) % clothingItems.length
-    );
-  };
-
   return (
-    <div className="relative w-full h-screen flex justify-center items-center overflow-hidden bg-gradient-to-b from-black to-gray-900">
-      {/* Previous Button */}
-      <button
-        onClick={handlePrev}
-        className="absolute left-4 bg-white text-black p-3 rounded-full shadow-lg hover:bg-gray-200 transition"
+    <div className="w-full h-screen flex justify-center items-center bg-gradient-to-b from-black to-gray-900">
+      <Swiper
+        spaceBetween={50}
+        slidesPerView={1}
+        loop={true}
+        autoplay={{
+          delay: 5000,
+          disableOnInteraction: true
+        }}
+        modules={[Autoplay]}
+        className="w-full h-full"
       >
-        &#8592;
-      </button>
-
-      {/* Clothing Item */}
-      <div className="flex flex-col items-center justify-center space-y-4 transition-transform duration-500">
-        <img
-          src={clothingItems[currentIndex].image}
-          alt={clothingItems[currentIndex].name}
-          className="w-80 h-80 object-cover rounded-lg shadow-lg"
-        />
-        <h2 className="text-3xl font-bold text-white mt-4">{clothingItems[currentIndex].name}</h2>
-        <p className="text-xl text-gray-400">${clothingItems[currentIndex].price}</p>
-        <button className="mt-4 bg-purple-600 hover:bg-blue-500 text-white px-6 py-2 rounded-md shadow-md transition">
-          Add to Cart
-        </button>
-      </div>
-
-      {/* Next Button */}
-      <button
-        onClick={handleNext}
-        className="absolute right-4 bg-white text-black p-3 rounded-full shadow-lg hover:bg-gray-200 transition"
-      >
-        &#8594;
-      </button>
+        {clothingItems.map((item) => (
+          <SwiperSlide key={item.id}>
+            <div className="flex flex-col items-center justify-center h-full">
+              <Image
+                src={item.image}
+                alt={item.name}
+                width={300}
+                height={300}
+                className="object-cover rounded-lg shadow-lg"
+              />
+              <h2 className="text-3xl font-bold text-white mt-4">{item.name}</h2>
+              <p className="text-xl text-gray-400">${item.price}</p>
+              <button className="mt-4 bg-purple-600 hover:bg-blue-500 text-white px-6 py-2 rounded-md shadow-md transition">
+                Add to Cart
+              </button>
+            </div>
+          </SwiperSlide>
+        ))}
+      </Swiper>
     </div>
   );
 }
