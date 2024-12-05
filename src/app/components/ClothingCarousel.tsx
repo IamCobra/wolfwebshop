@@ -19,19 +19,19 @@ const clothingItems: ClothingItem[] = [
     id: 1,
     name: "Chechen Hoodie",
     price: 60,
-    image: "/assets/testasset.jpg", // Ensure your image is in public/assets/
+    image: "/assets/testasset.jpg", 
   },
   {
     id: 2,
     name: "Chechen T-shirt",
     price: 40,
-    image: "/assets/chechen-tshirt.jpg", // Ensure your image is in public/assets/
+    image: "/assets/che-tshirt.jpg", 
   },
   {
     id: 3,
     name: "Chechen Sneakers",
     price: 80,
-    image: "/assets/chechen-sneakers.jpg", // Ensure your image is in public/assets/
+    image: "/assets/greenche-sneakers.webp", // husk at  
   },
 ];
 
