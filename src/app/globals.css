@@ -2,22 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
+
+/* For at sikre, at scrollbars skjules på body */
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
   scroll-behavior: smooth;
-  background-color: white;
   color: black;
+  background-color: white;
+
+  overflow: hidden; /* Start med skjult overflow */
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p,
-a {
+/* Tillad scrolling ved at sætte overflow på html */
+html {
+  overflow: auto;
+  scrollbar-width: none; /* Skjuler scrollbars i Firefox */
+  -ms-overflow-style: none; /* Skjuler scrollbars i Internet Explorer og Edge */
+}
+
+/* For WebKit-browsere (Chrome, Safari, etc.) */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+
+h1, h2, h3, h4, h5, h6, p, a {
   margin: 0;
   padding: 0;
 }
@@ -33,7 +43,57 @@ button {
 }
 
 nav {
-  backdrop-filter: blur(100px); /* Slør intensitet */
-  background-color: rgba(0, 0, 0, 0.5); /* Sort med 50% gennemsigtighed */
+  backdrop-filter: blur(10px);
+  background-color: rgba(0, 0, 0, 0.7);
   transition: background-color 0.3s ease;
+}
+
+.main-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-in-out forwards;
+}
+
+.animate-fade-up {
+  animation: fadeUp 1s ease-in-out forwards;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes imageMotion {
+  0% {
+    transform: scale(1) translateY(0);
+  }
+  50% {
+    transform: scale(1.05) translateY(-10px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+.animate-image-motion {
+  animation: imageMotion 10s ease-in-out infinite;
 }
