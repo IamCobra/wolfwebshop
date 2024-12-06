@@ -6,6 +6,8 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Image from "next/image";
+import Typed from "typed.js";
+import { useEffect, useRef } from "react";
 
 export default function Home() {
   const products = [
@@ -25,7 +27,9 @@ export default function Home() {
       id: 3,
       name: "Chechen Sneakers",
       price: 80,
-      image: "/assets/greenche-sneakers.webp",
+      image: "/assets/greenche-sneakers.webp", 
+      /* har problemer med id 3 og 4 siden de to fremviser samme billed. 
+      Evt. noget med formattet .webp og .jpg at gøre */
     },
     {
       id: 4,
@@ -35,38 +39,63 @@ export default function Home() {
     },
   ];
 
+  const typedElement = useRef(null);
+
+  useEffect(() => {
+    const typed = new Typed(typedElement.current, {
+      strings: [
+        "Dit design. Din historie. Din styrke.",
+        "Forener tradition og modernitet.",
+        "Vis verden, hvor du kommer fra.",
+      ],
+      typeSpeed: 55,
+      backSpeed: 35, 
+      backDelay: 2000, 
+      startDelay: 500, 
+      loop: true,
+      showCursor: false, // for at undgåå visuelle glitches med cursor
+    });
+  
+    return () => {
+      typed.destroy(); // Rens op for at forhindre memory leaks
+    };
+  }, []);
+  
+
+
   return (
     <main className="flex flex-col min-h-screen">
+      {/* Hero Section */}
       <section className="relative flex items-center justify-center h-screen bg-gray-900 text-gray-300">
-  <div className="absolute inset-0">
-    <Image
-      src="/assets/wolfimage.jpeg"
-      alt="Wolf Howling in Snow"
-      layout="fill"
-      objectFit="cover"
-      className="animate-image-motion"
-      priority
-    />
-    <div className="absolute inset-0 bg-black/50"></div>
-  </div>
-  <div className="relative z-10 text-center px-6">
-    <h1 className="text-5xl font-bold mb-6 text-white">
-      Strength in Tradition, Power in Style
-    </h1>
-    <p className="text-lg mb-8 text-gray-300">
-      Inspired by Chechen heritage. Wear your pride, honor your roots. 🏔️
-    </p>
-    <button className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-md shadow-md transition">
-      Explore Our Collection
-    </button>
-  </div>
-</section>
-
+        <div className="absolute inset-0">
+          <Image
+            src="/assets/wolfimage.jpeg"
+            alt="Wolf Howling in Snow"
+            layout="fill"
+            objectFit="cover"
+            className="animate-image-motion"
+            priority
+          />
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+        <div className="relative z-10 text-center px-6">
+          <h1
+            className="text-5xl font-bold mb-6 text-white"
+            ref={typedElement}
+          ></h1>
+          <p className="text-lg mb-8 text-gray-300">
+          Inspireret af tjetjensk arv. Bær din stolthed, ære dine rødder. 🏔️
+          </p>
+          <button className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-md shadow-md transition">
+            Udforsk Vores Kollektion
+          </button>
+        </div>
+      </section>
 
       {/* Featured Products */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-8">Featured Products</h2>
+          <h2 className="text-4xl font-bold text-center mb-8">Udvalgte Produkter</h2>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={50}

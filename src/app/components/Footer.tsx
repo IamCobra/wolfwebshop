@@ -11,19 +11,19 @@ const Footer = () => {
             href="/shop"
             className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300"
           >
-            Shop
+            Butik
           </Link>
           <Link
             href="/about"
             className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300"
           >
-            About Us
+            Omkring os
           </Link>
           <Link
             href="/contact"
             className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300"
           >
-            Contact
+            Kontakt
           </Link>
         </div>
 
@@ -64,7 +64,7 @@ const Footer = () => {
 
         {/* Copyright */}
         <p className="text-xs text-gray-500">
-          &copy; {new Date().getFullYear()} Berzloy. All rights reserved.
+          &copy; {new Date().getFullYear()} Berzloy. Alle rettigheder Reserveret.
         </p>
       </div>
     </footer>

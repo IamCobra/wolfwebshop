@@ -87,7 +87,7 @@ nav {
     transform: scale(1) translateY(0);
   }
   50% {
-    transform: scale(1.05) translateY(-10px);
+    transform: scale(1.05) translateY(-5px);
   }
   100% {
     transform: scale(1) translateY(0);
@@ -95,5 +95,8 @@ nav {
 }
 
 .animate-image-motion {
-  animation: imageMotion 10s ease-in-out infinite;
+  animation: imageMotion 8.5s ease-in-out infinite;
 }
+
+
+
