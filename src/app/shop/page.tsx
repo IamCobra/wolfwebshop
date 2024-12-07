@@ -74,63 +74,67 @@ export default function ShopPage() {
       <div className="container mx-auto py-12 px-6 lg:px-12">
         <h1 className="text-4xl font-bold text-center mb-12">Udforsk Vores Kollektion</h1>
 
-        {/* Filter Section */}
-        <aside className="mb-12">
-          <button
-            onClick={toggleFilter}
-            className="flex items-center justify-between bg-gray-800 text-white px-4 py-2 w-full rounded-lg shadow-md hover:bg-gray-700 transition"
-          >
-            <span>Filter og Sortering</span>
-            {isFilterOpen ? <ChevronUp /> : <ChevronDown />}
-          </button>
-          {isFilterOpen && (
-            <div className="mt-4 bg-gray-800 p-6 rounded-lg shadow-md">
-              {/* Kategorier */}
-              <div className="mb-6">
-                <h3 className="text-lg font-bold mb-2">Kategorier</h3>
-                <select
-                  value={selectedCategory}
-                  onChange={(e) => setSelectedCategory(e.target.value)}
-                  className="bg-gray-700 text-white px-4 py-2 rounded-lg w-full"
-                >
-                  {categories.map((category) => (
-                    <option key={category} value={category}>
-                      {category}
-                    </option>
-                  ))}
-                </select>
-              </div>
+       {/* Filter Section */}
+<aside className="mb-12">
+  <button
+    onClick={toggleFilter}
+    className="flex items-center justify-between bg-gray-800 text-white px-4 py-2 w-full rounded-lg shadow-md hover:bg-gray-700 transition"
+  >
+    <span>Filter og Sortering</span>
+    {isFilterOpen ? <ChevronUp /> : <ChevronDown />}
+  </button>
 
-              {/* Sortering */}
-              <div className="mb-6">
-                <h3 className="text-lg font-bold mb-2">Sortér efter</h3>
-                <select
-                  value={sortBy}
-                  onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-gray-700 text-white px-4 py-2 rounded-lg w-full"
-                >
-                  <option value="default">Standard</option>
-                  <option value="priceAsc">Pris: Lav til høj</option>
-                  <option value="priceDesc">Pris: Høj til lav</option>
-                </select>
-              </div>
+  {/* Smooth, slower transition for the filter */}
+  <div
+    className={`mt-4 bg-gray-800 p-6 rounded-lg shadow-md transition-all duration-1000 ${
+      isFilterOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+    } overflow-hidden`}
+  >
+    {/* Kategorier */}
+    <div className="mb-6">
+      <h3 className="text-lg font-bold mb-2">Kategorier</h3>
+      <select
+        value={selectedCategory}
+        onChange={(e) => setSelectedCategory(e.target.value)}
+        className="bg-gray-700 text-white px-4 py-2 rounded-lg w-full"
+      >
+        {categories.map((category) => (
+          <option key={category} value={category}>
+            {category}
+          </option>
+        ))}
+      </select>
+    </div>
 
-              {/* Kun på lager */}
-              <div className="flex items-center gap-4">
-                <input
-                  type="checkbox"
-                  id="inStock"
-                  checked={showInStockOnly}
-                  onChange={(e) => setShowInStockOnly(e.target.checked)}
-                  className="w-5 h-5"
-                />
-                <label htmlFor="inStock" className="text-lg">
-                  Kun på lager
-                </label>
-              </div>
-            </div>
-          )}
-        </aside>
+    {/* Sortering */}
+    <div className="mb-6">
+      <h3 className="text-lg font-bold mb-2">Sortér efter</h3>
+      <select
+        value={sortBy}
+        onChange={(e) => setSortBy(e.target.value)}
+        className="bg-gray-700 text-white px-4 py-2 rounded-lg w-full"
+      >
+        <option value="default">Standard</option>
+        <option value="priceAsc">Pris: Lav til høj</option>
+        <option value="priceDesc">Pris: Høj til lav</option>
+      </select>
+    </div>
+
+    {/* Kun på lager */}
+    <div className="flex items-center gap-4">
+      <input
+        type="checkbox"
+        id="inStock"
+        checked={showInStockOnly}
+        onChange={(e) => setShowInStockOnly(e.target.checked)}
+        className="w-5 h-5"
+      />
+      <label htmlFor="inStock" className="text-lg">
+        Kun på lager
+      </label>
+    </div>
+  </div>
+</aside>
 
         {/* Products Grid */}
         <section>
