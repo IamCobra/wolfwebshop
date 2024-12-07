@@ -7,37 +7,26 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Image from "next/image";
 import Typed from "typed.js";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const products = [
-    {
-      id: 1,
-      name: "Chechen T-Shirt",
-      price: 40,
-      image: "/assets/che-tshirt.jpg",
-    },
-    {
-      id: 2,
-      name: "Chechen Hoodie",
-      price: 60,
-      image: "/assets/testasset.jpg",
-    },
-    {
-      id: 3,
-      name: "Chechen Sneakers",
-      price: 80,
-      image: "/assets/greenche-sneakers.webp",
-    },
-    {
-      id: 4,
-      name: "Chechen Cap",
-      price: 25,
-      image: "/assets/checap.jpg",
-    },
+    { id: 1, name: "Chechen T-Shirt", price: 40, image: "/assets/che-tshirt.jpg" },
+    { id: 2, name: "Chechen Hoodie", price: 60, image: "/assets/testasset.jpg" },
+    { id: 3, name: "Chechen Sneakers", price: 80, image: "/assets/greenche-sneakers.webp" },
+    { id: 4, name: "Chechen Cap", price: 25, image: "/assets/checap.jpg" },
   ];
 
   const typedElement = useRef(null);
+  const [showQuote, setShowQuote] = useState(true);
+  const [currentQuote, setCurrentQuote] = useState(0);
+  const [fade, setFade] = useState(true); // Styrer fade-effekten til mig selv i fremtiden
+
+  const quotes = [
+    { text: "Frihed er mere værd end livet selv.", author: "- Baysangur" },
+    { text: "Jeg vil hellere dø stående end leve på knæ.", author: "- Baysangur" },
+    { text: "Stolthed og ære er vores arv.", author: "- Tjetjensk ordsprog" },
+  ];
 
   useEffect(() => {
     const typed = new Typed(typedElement.current, {
@@ -59,6 +48,19 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setFade(false); // Start fade-out
+      setTimeout(() => {
+        const nextQuote = (currentQuote + 1) % quotes.length;
+        setCurrentQuote(nextQuote);
+        setFade(true); // Start fade-in
+      }, 800); // Vent 800 ms, mens det gamle citat fader ud
+    }, 7000); // Skift citat hvert 7. sekund
+
+    return () => clearInterval(interval);
+  }, [currentQuote]);
+
   return (
     <main className="flex flex-col min-h-screen">
       {/* Hero Section */}
@@ -75,10 +77,7 @@ export default function Home() {
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
         <div className="relative z-10 text-center px-6">
-          <h1
-            className="text-5xl font-bold mb-6 text-white"
-            ref={typedElement}
-          ></h1>
+          <h1 className="text-5xl font-bold mb-6 text-white" ref={typedElement}></h1>
           <p className="text-lg mb-8 text-gray-300">
             Inspireret af tjetjensk arv. Bær din stolthed, ære dine rødder. 🏔️
           </p>
@@ -86,13 +85,37 @@ export default function Home() {
             Udforsk Vores Kollektion
           </button>
         </div>
-
-        {/* Quote Section */}
-        <div className="absolute bottom-4 left-4 bg-black/70 text-white p-4 rounded-lg max-w-xs shadow-md">
-          <p className="text-sm italic">"Frihed er mere værd end livet selv."</p>
-          <p className="text-xs text-right mt-2">- Baysangur</p>
-        </div>
       </section>
+
+      {/* Floating Quote */}
+      {showQuote && (
+        <div
+          className={`fixed bottom-4 left-4 bg-black/70 text-white p-4 rounded-lg max-w-xs shadow-md z-50 transition-all duration-1000 ease-in-out ${
+            showQuote ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+          }`}
+        >
+          <button
+            className="absolute top-1 right-1 text-white text-sm hover:text-gray-400 transition"
+            onClick={() => setShowQuote(false)}
+          >
+            ✕
+          </button>
+          <p
+            className={`text-sm italic transition-all duration-1000 ease-in-out ${
+              fade ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {quotes[currentQuote].text}
+          </p>
+          <p
+            className={`text-xs text-right mt-2 transition-all duration-1000 ease-in-out ${
+              fade ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            {quotes[currentQuote].author}
+          </p>
+        </div>
+      )}
 
       {/* Featured Products */}
       <section className="py-16 bg-white">
@@ -134,76 +157,6 @@ export default function Home() {
               </SwiperSlide>
             ))}
           </Swiper>
-        </div>
-      </section>
-
-      {/* Features Section */}
-      <section className="bg-gray-100 py-16">
-        <div className="container mx-auto px-4">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            <div className="flex flex-col items-center animate-fade-in">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="w-12 h-12 text-gray-700 mb-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M3 10l1.664 9.193a2 2 0 001.988 1.807h12.696a2 2 0 001.988-1.807L21 10M7 10V7a5 5 0 0110 0v3"
-                />
-              </svg>
-              <h3 className="text-xl font-bold">Altid Hurtig Levering</h3>
-              <p className="text-gray-600 mt-2">
-                Vi garanterer hurtig levering og nem ombytning.
-              </p>
-            </div>
-            <div className="flex flex-col items-center animate-fade-up">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="w-12 h-12 text-gray-700 mb-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 8c-2.28 0-4 1.49-4 3.333 0 1.848 1.72 3.334 4 3.334s4-1.486 4-3.334C16 9.49 14.28 8 12 8zm0 8c-2.577 0-5.365.705-6.743 1.957-.282.254-.257.743.013.986C7.16 19.91 9.374 20 12 20s4.84-.09 6.73-.057c.27-.243.296-.732.014-.986C17.365 16.705 14.577 16 12 16z"
-                />
-              </svg>
-              <h3 className="text-xl font-bold">Sikker Betaling</h3>
-              <p className="text-gray-600 mt-2">
-                Du kan på shoppen betale med Visa, Mastercard, Dankort og Apple
-                Pay.
-              </p>
-            </div>
-            <div className="flex flex-col items-center animate-fade-in">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="w-12 h-12 text-gray-700 mb-4"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M12 20v-2m0 0a6 6 0 006-6H6a6 6 0 006 6zm0 0v2m4-2h3M8 18H5"
-                />
-              </svg>
-              <h3 className="text-xl font-bold">Effektiv Support</h3>
-              <p className="text-gray-600 mt-2">
-                Kontakt os på merch@berzloy.dk hvis du har nogle spørgsmål eller
-                problemer.
-              </p>
-            </div>
-          </div>
         </div>
       </section>
     </main>
