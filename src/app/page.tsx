@@ -96,7 +96,7 @@ export default function Home() {
         <div className="relative z-10 text-center px-6">
           <h1 className="text-5xl font-bold mb-6 text-white" ref={typedElement}></h1>
           <p className="text-lg mb-8 text-gray-300">
-            Inspireret af tjetjensk arv. Bær din stolthed, ære dine rødder. 
+            Inspireret af tjetjensk arv. Bær din stolthed, ære dine rødder.
           </p>
           <button
             onClick={scrollToCarousel}
@@ -185,6 +185,39 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Nyeste Kollektion Section */}
+      <section className="bg-gray-100 py-16">
+  <div className="container mx-auto px-4">
+    <h2 className="text-4xl font-bold text-center mb-8">Nyeste Kollektion</h2>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12">
+      {products.slice(0, 2).map((product) => (
+        <div
+          key={product.id}
+          className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+        >
+          <div className="relative w-full h-96">
+            <Image
+              src={product.image}
+              alt={product.name}
+              layout="fill"
+              objectFit="cover"
+              className="hover:opacity-80 transition-opacity duration-300"
+            />
+          </div>
+          <div className="p-6 text-center">
+            <h3 className="text-2xl font-semibold mb-2">{product.name}</h3>
+            <p className="text-lg font-bold text-gray-700 mb-4">{product.price} kr.</p>
+            <button className="bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">
+              Hurtigvisning
+            </button>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+
       {/* Features Section */}
       <section className="bg-gray-100 py-16">
         <div className="container mx-auto px-4">
@@ -208,7 +241,7 @@ export default function Home() {
         </div>
       </section>
 
-      <Newsletter/>
+      <Newsletter />
     </main>
   );
 }

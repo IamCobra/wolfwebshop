@@ -3,7 +3,7 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 
-// Mock produktdata (kan udskiftes med en API-call senere)
+// Mock product data (replace with API calls later)
 const products = [
   {
     slug: "chechen-hoodie",
@@ -30,7 +30,7 @@ const products = [
 
 export default function ProductPage() {
   const params = useParams();
-  const productSlug = params.product;
+  const productSlug = params.product; // Matches the dynamic segment [product]
   const product = products.find((p) => p.slug === productSlug);
 
   if (!product) {
@@ -50,7 +50,7 @@ export default function ProductPage() {
         <h1 className="text-3xl font-bold mt-4">{product.name}</h1>
         <p className="text-lg text-gray-300 mt-2">{product.description}</p>
         <p className="text-xl font-bold mt-4">{product.price} kr.</p>
-        <button 
+        <button
           className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
         >
           Tilføj til kurv
