@@ -27,7 +27,7 @@ const Footer = () => {
           </Link>
 
           <Link
-            href="/Ofte-Stillede-Spørgsmål"
+            href="/FAQ"
             className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300"
           >
             Ofte Stillede Spørgsmål

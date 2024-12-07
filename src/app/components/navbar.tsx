@@ -28,9 +28,7 @@ export default function Navbar() {
           <Link href="/contact" className="hover:text-yellow-400">
             Kontakt
           </Link>
-          <Link href="/chechenhistory" className="hover:text-yellow-400">
-            Tjetjensk Historie
-          </Link>
+
         </div>
 
         {/* Actions */}
