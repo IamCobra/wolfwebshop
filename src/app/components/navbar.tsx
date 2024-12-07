@@ -13,7 +13,7 @@ export default function Navbar() {
         {/* Logo */}
         <div className="flex items-center">
           <Link href="/" className="text-2xl font-bold">
-            🐺 Berzloy 🐺
+            🐺 Nokh 🐺
           </Link>
         </div>
 

@@ -1,34 +1,37 @@
 "use client";
 
+import { useParams } from "next/navigation";
 import Image from "next/image";
 
-// Mock data for products
+// Mock produktdata (kan udskiftes med en API-call senere)
 const products = [
   {
     slug: "chechen-hoodie",
     name: "Chechen Hoodie",
     price: 375,
     image: "/assets/testasset.jpg",
-    description: "A stylish and comfortable hoodie inspired by Chechen heritage.",
+    description: "En stilet og komfortabel hættetrøje inspireret af tjetjensk arv.",
   },
   {
     slug: "chechen-tshirt",
     name: "Chechen T-Shirt",
     price: 225,
     image: "/assets/che-tshirt.jpg",
-    description: "A premium t-shirt showcasing Chechen pride.",
+    description: "En premium t-shirt, der viser tjetjensk stolthed.",
   },
   {
     slug: "chechen-sneakers",
     name: "Chechen Sneakers",
     price: 400,
     image: "/assets/greenche-sneakers.webp",
-    description: "Elegant sneakers with a modern Chechen twist.",
+    description: "Elegante sneakers med et moderne tjetjensk twist.",
   },
 ];
 
-export default function ProductPage({ params }: { params: { product: string } }) {
-  const product = products.find((p) => p.slug === params.product);
+export default function ProductPage() {
+  const params = useParams();
+  const productSlug = params.product;
+  const product = products.find((p) => p.slug === productSlug);
 
   if (!product) {
     return <div className="text-center text-white">Produkt ikke fundet</div>;
@@ -47,7 +50,9 @@ export default function ProductPage({ params }: { params: { product: string } })
         <h1 className="text-3xl font-bold mt-4">{product.name}</h1>
         <p className="text-lg text-gray-300 mt-2">{product.description}</p>
         <p className="text-xl font-bold mt-4">{product.price} kr.</p>
-        <button className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700">
+        <button 
+          className="mt-4 px-6 py-3 bg-blue-600 text-white rounded-lg shadow hover:bg-blue-700"
+        >
           Tilføj til kurv
         </button>
       </div>

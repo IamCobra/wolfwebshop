@@ -202,7 +202,7 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <Headphones className="w-12 h-12 text-gray-700 mb-4" />
               <h3 className="text-xl font-bold">Effektiv Support</h3>
-              <p className="text-gray-600">Kontakt os på merch@berzloy.dk.</p>
+              <p className="text-gray-600">Kontakt os på merch@nokh.dk.</p>
             </div>
           </div>
         </div>
