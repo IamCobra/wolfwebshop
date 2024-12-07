@@ -10,6 +10,7 @@ import Typed from "typed.js";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { Truck, CreditCard, Headphones } from "lucide-react";
+import Newsletter from "./components/Newsletter";
 
 export default function Home() {
   const products = [
@@ -206,6 +207,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Newsletter/>
     </main>
   );
 }
