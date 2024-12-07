@@ -16,15 +16,15 @@ export default function ContactPage() {
             <h3 className="text-2xl font-bold mb-4">Vores Kontaktoplysninger</h3>
             <div className="flex items-center mb-4">
               <Mail className="w-6 h-6 text-blue-500 mr-4" />
-              <p className="text-gray-300">support@berzloy.dk</p>
+              <p className="text-gray-300">support@nokh.dk</p>
             </div>
             <div className="flex items-center mb-4">
               <Phone className="w-6 h-6 text-blue-500 mr-4" />
-              <p className="text-gray-300">+45 12 34 56 78</p>
+              <p className="text-gray-300">+45 60 90 34 94</p>
             </div>
             <div className="flex items-center">
               <MapPin className="w-6 h-6 text-blue-500 mr-4" />
-              <p className="text-gray-300">Berzloy, København, Danmark</p>
+              <p className="text-gray-300">Nokh, Odense, Danmark</p>
             </div>
           </div>
 
