@@ -27,9 +27,7 @@ export default function Home() {
       id: 3,
       name: "Chechen Sneakers",
       price: 80,
-      image: "/assets/greenche-sneakers.webp", 
-      /* har problemer med id 3 og 4 siden de to fremviser samme billed. 
-      Evt. noget med formattet .webp og .jpg at gøre */
+      image: "/assets/greenche-sneakers.webp",
     },
     {
       id: 4,
@@ -49,19 +47,17 @@ export default function Home() {
         "Vis verden, hvor du kommer fra.",
       ],
       typeSpeed: 55,
-      backSpeed: 35, 
-      backDelay: 2000, 
-      startDelay: 500, 
+      backSpeed: 35,
+      backDelay: 2000,
+      startDelay: 500,
       loop: true,
-      showCursor: false, // for at undgåå visuelle glitches med cursor
+      showCursor: false,
     });
-  
+
     return () => {
-      typed.destroy(); // Rens op for at forhindre memory leaks
+      typed.destroy();
     };
   }, []);
-  
-
 
   return (
     <main className="flex flex-col min-h-screen">
@@ -84,18 +80,26 @@ export default function Home() {
             ref={typedElement}
           ></h1>
           <p className="text-lg mb-8 text-gray-300">
-          Inspireret af tjetjensk arv. Bær din stolthed, ære dine rødder. 🏔️
+            Inspireret af tjetjensk arv. Bær din stolthed, ære dine rødder. 🏔️
           </p>
           <button className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-md shadow-md transition">
             Udforsk Vores Kollektion
           </button>
+        </div>
+
+        {/* Quote Section */}
+        <div className="absolute bottom-4 left-4 bg-black/70 text-white p-4 rounded-lg max-w-xs shadow-md">
+          <p className="text-sm italic">"Frihed er mere værd end livet selv."</p>
+          <p className="text-xs text-right mt-2">- Baysangur</p>
         </div>
       </section>
 
       {/* Featured Products */}
       <section className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-8">Udvalgte Produkter</h2>
+          <h2 className="text-4xl font-bold text-center mb-8">
+            Udvalgte Produkter
+          </h2>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={50}
@@ -137,7 +141,6 @@ export default function Home() {
       <section className="bg-gray-100 py-16">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
-            {/* Feature 1 */}
             <div className="flex flex-col items-center animate-fade-in">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -158,7 +161,6 @@ export default function Home() {
                 Vi garanterer hurtig levering og nem ombytning.
               </p>
             </div>
-            {/* Feature 2 */}
             <div className="flex flex-col items-center animate-fade-up">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -176,10 +178,10 @@ export default function Home() {
               </svg>
               <h3 className="text-xl font-bold">Sikker Betaling</h3>
               <p className="text-gray-600 mt-2">
-                Du kan på shoppen betale med Visa, Mastercard, Dankort og Apple Pay.
+                Du kan på shoppen betale med Visa, Mastercard, Dankort og Apple
+                Pay.
               </p>
             </div>
-            {/* Feature 3 */}
             <div className="flex flex-col items-center animate-fade-in">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -197,7 +199,8 @@ export default function Home() {
               </svg>
               <h3 className="text-xl font-bold">Effektiv Support</h3>
               <p className="text-gray-600 mt-2">
-                Kontakt os på merch@berzloy.dk hvis du har nogle spørgsmål eller problemer.
+                Kontakt os på merch@berzloy.dk hvis du har nogle spørgsmål eller
+                problemer.
               </p>
             </div>
           </div>

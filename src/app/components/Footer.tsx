@@ -25,6 +25,21 @@ const Footer = () => {
           >
             Kontakt
           </Link>
+
+          <Link
+            href="/Ofte-Stillede-Spørgsmål"
+            className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300"
+          >
+            Ofte Stillede Spørgsmål
+          </Link>
+
+          <Link
+            href="/Returpolitik"
+            className="text-gray-400 hover:text-[#d4af37] transition-colors duration-300"
+          >
+            Returpolitik
+          </Link>
+
         </div>
 
         {/* Social Media Icons */}
