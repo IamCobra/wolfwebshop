@@ -8,19 +8,22 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Image from "next/image";
 import Typed from "typed.js";
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { Truck, CreditCard, Headphones } from "lucide-react";
 
 export default function Home() {
   const products = [
-    { id: 1, name: "Chechen T-Shirt", price: 40, image: "/assets/che-tshirt.jpg" },
-    { id: 2, name: "Chechen Hoodie", price: 60, image: "/assets/testasset.jpg" },
-    { id: 3, name: "Chechen Sneakers", price: 80, image: "/assets/greenche-sneakers.webp" },
-    { id: 4, name: "Chechen Cap", price: 25, image: "/assets/checap.jpg" },
+    { id: 1, name: "Chechen T-Shirt", price: 225, image: "/assets/che-tshirt.jpg" },
+    { id: 2, name: "Chechen Hoodie", price: 375, image: "/assets/testasset.jpg" },
+    { id: 3, name: "Chechen Sneakers", price: 400, image: "/assets/greenche-sneakers.webp" },
+    { id: 4, name: "Chechen Cap", price: 75, image: "/assets/checap.jpg" },
   ];
 
-  const typedElement = useRef(null);
+  const typedElement = useRef<HTMLHeadingElement | null>(null);
   const [showQuote, setShowQuote] = useState(true);
   const [currentQuote, setCurrentQuote] = useState(0);
-  const [fade, setFade] = useState(true); // Styrer fade-effekten til mig selv i fremtiden
+  const [fade, setFade] = useState(true);
+  const carouselRef = useRef<HTMLDivElement | null>(null);
 
   const quotes = [
     { text: "Frihed er mere værd end livet selv.", author: "- Baysangur" },
@@ -50,16 +53,29 @@ export default function Home() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setFade(false); // Start fade-out
+      setFade(false);
       setTimeout(() => {
         const nextQuote = (currentQuote + 1) % quotes.length;
         setCurrentQuote(nextQuote);
-        setFade(true); // Start fade-in
-      }, 800); // Vent 800 ms, mens det gamle citat fader ud
-    }, 7000); // Skift citat hvert 7. sekund
+        setFade(true);
+      }, 800);
+    }, 7000);
 
     return () => clearInterval(interval);
   }, [currentQuote]);
+
+  const generateSlug = (name: string): string =>
+    name.toLowerCase().replace(/\s+/g, "-").replace(/[^a-z0-9-]/g, "");
+
+  const scrollToCarousel = () => {
+    const element = carouselRef.current;
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop,
+        behavior: "smooth", // Enables smooth scrolling
+      });
+    }
+  };
 
   return (
     <main className="flex flex-col min-h-screen">
@@ -79,9 +95,12 @@ export default function Home() {
         <div className="relative z-10 text-center px-6">
           <h1 className="text-5xl font-bold mb-6 text-white" ref={typedElement}></h1>
           <p className="text-lg mb-8 text-gray-300">
-            Inspireret af tjetjensk arv. Bær din stolthed, ære dine rødder. 🏔️
+            Inspireret af tjetjensk arv. Bær din stolthed, ære dine rødder. 
           </p>
-          <button className="px-6 py-3 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-md shadow-md transition">
+          <button
+            onClick={scrollToCarousel}
+            className="px-6 py-4 bg-slate-800 hover:bg-slate-900 text-white font-bold rounded-md shadow-md transition"
+          >
             Udforsk Vores Kollektion
           </button>
         </div>
@@ -118,17 +137,18 @@ export default function Home() {
       )}
 
       {/* Featured Products */}
-      <section className="py-16 bg-white">
+      <section ref={carouselRef} className="py-16 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold text-center mb-8">
-            Udvalgte Produkter
-          </h2>
+          <h2 className="text-4xl font-bold text-center mb-8">Udvalgte Produkter</h2>
           <Swiper
             modules={[Navigation, Pagination, Autoplay]}
             spaceBetween={50}
             slidesPerView={1}
             navigation
-            pagination={{ clickable: true }}
+            pagination={{
+              clickable: true,
+              el: ".custom-pagination",
+            }}
             autoplay={{ delay: 3000 }}
             breakpoints={{
               640: { slidesPerView: 1 },
@@ -149,14 +169,41 @@ export default function Home() {
                     />
                   </div>
                   <h3 className="text-xl font-bold mt-4">{product.name}</h3>
-                  <p className="text-gray-700">${product.price}</p>
-                  <button className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-md shadow-md transition">
-                    View Product
-                  </button>
+                  <p className="text-gray-700">{product.price} kr.</p>
+                  <Link
+                    href={`/products/${generateSlug(product.name)}`}
+                    className="mt-4 px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white font-bold rounded-md shadow-md transition text-center"
+                  >
+                    Se vare
+                  </Link>
                 </div>
               </SwiperSlide>
             ))}
           </Swiper>
+          <div className="custom-pagination mt-4"></div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="bg-gray-100 py-16">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+            <div className="flex flex-col items-center">
+              <Truck className="w-12 h-12 text-gray-700 mb-4" />
+              <h3 className="text-xl font-bold">Hurtig Levering</h3>
+              <p className="text-gray-600">Levering på 2-3 dage.</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <CreditCard className="w-12 h-12 text-gray-700 mb-4" />
+              <h3 className="text-xl font-bold">Sikker Betaling</h3>
+              <p className="text-gray-600">Betal med Visa, Mastercard eller Apple Pay.</p>
+            </div>
+            <div className="flex flex-col items-center">
+              <Headphones className="w-12 h-12 text-gray-700 mb-4" />
+              <h3 className="text-xl font-bold">Effektiv Support</h3>
+              <p className="text-gray-600">Kontakt os på merch@berzloy.dk.</p>
+            </div>
+          </div>
         </div>
       </section>
     </main>
