@@ -1,7 +1,7 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 // Mock product data (replace with API calls later)
 const products = [
@@ -38,7 +38,7 @@ export default function ProductPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-800 to-black text-white flex flex-col items-center justify-center">
+    (<div className="min-h-screen bg-gradient-to-b from-gray-800 to-black text-white flex flex-col items-center justify-center">
       <div className="max-w-2xl bg-gray-700 p-6 rounded-lg shadow-lg">
         <Image
           src={product.image}
@@ -46,7 +46,10 @@ export default function ProductPage() {
           width={500}
           height={500}
           className="rounded-lg"
-        />
+          style={{
+            maxWidth: "100%",
+            height: "auto"
+          }} />
         <h1 className="text-3xl font-bold mt-4">{product.name}</h1>
         <p className="text-lg text-gray-300 mt-2">{product.description}</p>
         <p className="text-xl font-bold mt-4">{product.price} kr.</p>
@@ -56,6 +59,6 @@ export default function ProductPage() {
           Tilføj til kurv
         </button>
       </div>
-    </div>
+    </div>)
   );
 }

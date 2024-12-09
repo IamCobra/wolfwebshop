@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 type Product = {
   id: number;
@@ -21,7 +21,7 @@ const ProductModal = ({ product, isOpen, onClose }: ModalProps) => {
   if (!isOpen || !product) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+    (<div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
       {/* Modal Content */}
       <div className="bg-gray-900 text-gray-300 rounded-lg shadow-lg w-full max-w-2xl p-6">
         <button
@@ -40,7 +40,10 @@ const ProductModal = ({ product, isOpen, onClose }: ModalProps) => {
               width={400}
               height={400}
               className="object-cover rounded-lg"
-            />
+              style={{
+                maxWidth: "100%",
+                height: "auto"
+              }} />
           </div>
 
           {/* Product Details */}
@@ -67,7 +70,7 @@ const ProductModal = ({ product, isOpen, onClose }: ModalProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </div>)
   );
 };
 

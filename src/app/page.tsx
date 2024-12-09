@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import Typed from "typed.js";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -79,17 +79,17 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col min-h-screen">
+    (<main className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative flex items-center justify-center h-screen bg-gray-900 text-gray-300">
         <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/assets/wolfimage.jpeg"
             alt="Wolf Howling in Snow"
-            layout="fill"
             className="animate-image-motion object-cover"
             priority
-          />
+            fill
+            sizes="100vw" />
           <div className="absolute inset-0 bg-black/50"></div>
         </div>
         <div className="relative z-10 text-center px-6">
@@ -105,7 +105,6 @@ export default function Home() {
           </button>
         </div>
       </section>
-
       {/* Floating Quote */}
       {showQuote && (
         <div
@@ -132,7 +131,6 @@ export default function Home() {
           </p>
         </div>
       )}
-
       {/* Featured Products */}
       <section ref={carouselRef} className="py-16 bg-white">
         <div className="container mx-auto px-4">
@@ -163,7 +161,10 @@ export default function Home() {
                       width={300}
                       height={300}
                       className="object-contain rounded-lg"
-                    />
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto"
+                      }} />
                   </div>
                   <h3 className="text-xl font-bold mt-4">{product.name}</h3>
                   <p className="text-gray-700">{product.price} kr.</p>
@@ -180,7 +181,6 @@ export default function Home() {
           <div className="custom-pagination mt-4"></div>
         </div>
       </section>
-
       {/* Nyeste Kollektion Section */}
       <section className="bg-gray-100 py-16">
         <div className="container mx-auto px-4">
@@ -195,9 +195,9 @@ export default function Home() {
                   <Image
                     src={product.image}
                     alt={product.name}
-                    layout="fill"
                     className="hover:opacity-80 transition-opacity duration-300 object-cover"
-                  />
+                    fill
+                    sizes="100vw" />
                 </div>
                 <div className="p-6 text-center">
                   <h3 className="text-2xl font-semibold mb-2">{product.name}</h3>
@@ -211,8 +211,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-
       {/* Features Section */}
       <section className="bg-gray-100 py-16">
         <div className="container mx-auto px-4">
@@ -235,8 +233,7 @@ export default function Home() {
           </div>
         </div>
       </section>
-
       <Newsletter />
-    </main>
+    </main>)
   );
 }

@@ -1,10 +1,10 @@
 "use client";
 
-import Image from "next/legacy/image";
+import Image from "next/image";
 
 export default function AboutPage() {
   return (
-    <main className="bg-gradient-to-b from-gray-900 to-black text-white min-h-screen">
+    (<main className="bg-gradient-to-b from-gray-900 to-black text-white min-h-screen">
       <section className="container mx-auto py-24 px-6 lg:px-12">
         <h1 className="text-5xl font-bold text-center mb-10">
           Om Os
@@ -32,7 +32,10 @@ export default function AboutPage() {
                 width={500}
                 height={500}
                 className="rounded-lg shadow-lg"
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
             </div>
           </div>
         </div>
@@ -77,7 +80,10 @@ export default function AboutPage() {
                 width={200}
                 height={200}
                 className="w-40 h-40 rounded-full mx-auto mb-6"
-              />
+                style={{
+                  maxWidth: "100%",
+                  height: "auto"
+                }} />
               <h3 className="text-2xl font-bold text-center mb-2">Ikhvan</h3>
               <p className="text-center text-gray-400">Stifter & Designer</p>
               <p className="text-gray-300 text-center mt-4">
@@ -105,6 +111,6 @@ export default function AboutPage() {
           </div>
         </section>
       </section>
-    </main>
+    </main>)
   );
 }

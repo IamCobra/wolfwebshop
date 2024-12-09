@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/legacy/image";
+import Image from "next/image";
 import { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 
@@ -72,7 +72,7 @@ export default function ShopPage() {
   const newestProducts = products.slice(0, 2); // Display the first two products as the newest collection
 
   return (
-    <div className="bg-gradient-to-b from-gray-900 to-black min-h-screen text-white">
+    (<div className="bg-gradient-to-b from-gray-900 to-black min-h-screen text-white">
       <div className="container mx-auto py-20 px-6 lg:px-12">
         {/* Heading */}
         <h1 className="text-4xl font-bold text-center mb-16">Udforsk Vores Kollektion</h1>
@@ -154,7 +154,10 @@ export default function ShopPage() {
                   width={400}
                   height={400}
                   className="w-full h-64 object-cover"
-                />
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto"
+                  }} />
                 <div className="p-4">
                   <h3 className="text-xl font-bold">{product.name}</h3>
                   <p className="text-lg font-semibold text-gray-300 mt-2">{product.price} kr.</p>
@@ -186,7 +189,10 @@ export default function ShopPage() {
                     width={400}
                     height={400}
                     className="w-full h-64 object-cover"
-                  />
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto"
+                    }} />
                   <div className="p-4">
                     <h3 className="text-xl font-bold">{product.name}</h3>
                     <p className="text-lg font-semibold text-gray-300 mt-2">{product.price} kr.</p>
@@ -208,6 +214,6 @@ export default function ShopPage() {
           </div>
         </section>
       </div>
-    </div>
+    </div>)
   );
 }
