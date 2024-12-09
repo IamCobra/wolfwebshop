@@ -82,13 +82,12 @@ export default function Home() {
     <main className="flex flex-col min-h-screen">
       {/* Hero Section */}
       <section className="relative flex items-center justify-center h-screen bg-gray-900 text-gray-300">
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 overflow-hidden">
           <Image
             src="/assets/wolfimage.jpeg"
             alt="Wolf Howling in Snow"
             layout="fill"
-            objectFit="cover"
-            className="animate-image-motion"
+            className="animate-image-motion object-cover"
             priority
           />
           <div className="absolute inset-0 bg-black/50"></div>
@@ -110,27 +109,24 @@ export default function Home() {
       {/* Floating Quote */}
       {showQuote && (
         <div
-          className={`fixed bottom-4 left-4 bg-black/70 text-white p-4 rounded-lg max-w-xs shadow-md z-50 transition-all duration-1000 ease-in-out ${
-            showQuote ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
-          }`}
+          className={`fixed bottom-4 left-4 bg-black/70 text-white p-4 pr-6 rounded-lg max-w-xs shadow-md z-50 transition-all duration-1000 ease-in-out ${showQuote ? "translate-y-0 opacity-100" : "translate-y-8 opacity-0"
+            }`}
         >
           <button
-            className="absolute top-1 right-1 text-white text-sm hover:text-gray-400 transition"
+            className="absolute top-1 right-2 text-white text-sm hover:text-gray-400 transition "
             onClick={() => setShowQuote(false)}
           >
             ✕
           </button>
           <p
-            className={`text-sm italic transition-all duration-1000 ease-in-out ${
-              fade ? "opacity-100" : "opacity-0"
-            }`}
+            className={`text-sm italic transition-all duration-1000 ease-in-out ${fade ? "opacity-100" : "opacity-0"
+              }`}
           >
             {quotes[currentQuote].text}
           </p>
           <p
-            className={`text-xs text-right mt-2 transition-all duration-1000 ease-in-out ${
-              fade ? "opacity-100" : "opacity-0"
-            }`}
+            className={`text-xs text-right mt-2 transition-all duration-1000 ease-in-out ${fade ? "opacity-100" : "opacity-0"
+              }`}
           >
             {quotes[currentQuote].author}
           </p>
@@ -157,8 +153,8 @@ export default function Home() {
               1024: { slidesPerView: 3 },
             }}
           >
-            {products.map((product) => (
-              <SwiperSlide key={product.id}>
+            {products.map((product, index) => (
+              <SwiperSlide key={index}>
                 <div className="flex flex-col items-center justify-center p-4 bg-gray-100 shadow-lg hover:shadow-2xl rounded-lg transition-transform duration-300 hover:scale-105">
                   <div className="relative h-72 w-full flex items-center justify-center">
                     <Image
@@ -187,35 +183,34 @@ export default function Home() {
 
       {/* Nyeste Kollektion Section */}
       <section className="bg-gray-100 py-16">
-  <div className="container mx-auto px-4">
-    <h2 className="text-4xl font-bold text-center mb-8">Nyeste Kollektion</h2>
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12">
-      {products.slice(0, 2).map((product) => (
-        <div
-          key={product.id}
-          className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
-        >
-          <div className="relative w-full h-96">
-            <Image
-              src={product.image}
-              alt={product.name}
-              layout="fill"
-              objectFit="cover"
-              className="hover:opacity-80 transition-opacity duration-300"
-            />
-          </div>
-          <div className="p-6 text-center">
-            <h3 className="text-2xl font-semibold mb-2">{product.name}</h3>
-            <p className="text-lg font-bold text-gray-700 mb-4">{product.price} kr.</p>
-            <button className="bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">
-              Hurtigvisning
-            </button>
+        <div className="container mx-auto px-4">
+          <h2 className="text-4xl font-bold text-center mb-8">Nyeste Kollektion</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-12">
+            {products.slice(0, 2).map((product, index) => (
+              <div
+                key={index}
+                className="bg-white shadow-lg rounded-lg overflow-hidden transform hover:scale-105 transition-transform duration-300"
+              >
+                <div className="relative w-full h-96">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    layout="fill"
+                    className="hover:opacity-80 transition-opacity duration-300 object-cover"
+                  />
+                </div>
+                <div className="p-6 text-center">
+                  <h3 className="text-2xl font-semibold mb-2">{product.name}</h3>
+                  <p className="text-lg font-bold text-gray-700 mb-4">{product.price} kr.</p>
+                  <button className="bg-gray-900 text-white py-2 px-4 rounded-lg hover:bg-gray-700 transition">
+                    Hurtigvisning
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
-      ))}
-    </div>
-  </div>
-</section>
+      </section>
 
 
       {/* Features Section */}

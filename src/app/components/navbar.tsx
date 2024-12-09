@@ -23,7 +23,7 @@ export default function Navbar() {
             Butik
           </Link>
           <Link href="/about" className="hover:text-yellow-400">
-            Omkring os
+            Om os
           </Link>
           <Link href="/contact" className="hover:text-yellow-400">
             Kontakt
